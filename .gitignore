@@ -1,0 +1,14 @@
+#ignore all hidden files except .gitignore
+.*
+!/.gitignore
+
+#ignore
+
+#ignore sqlite db file
+app/db.sqlite3
+
+#ignore media files
+app/media/*
+
+#ignore pycache folders
+**/__pycache__
