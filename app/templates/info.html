@@ -1,0 +1,59 @@
+<div class="toast-container">
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header bg-danger text-white">
+                        <strong class="me-auto">Ошибка</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                aria-label="Закрыть"></button>
+                    </div>
+                    <div class="toast-body">
+                        {{ error }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header bg-danger text-white">
+                    <strong class="me-auto">Ошибка</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Закрыть"></button>
+                </div>
+                <div class="toast-body">
+                    {{ error }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header
+                {% if message.tags == "error" %}bg-danger text-white
+                {% elif message.tags == "warning" %}bg-warning text-white
+                {% elif message.tags == "success" %}bg-success text-white
+                {% elif message.tags == "info" %}bg-info
+                {% elif message.tags == "debug" %}
+                {% endif %}">
+                    <strong class="me-auto">
+                        {% if message.tags == "error" %}Ошибка!
+                        {% elif message.tags == "warning" %}Внимание!
+                            {% elif message.tags == "success" %}Успешно!
+                        {% elif message.tags == "info" %}Важная информация!
+                        {% elif message.tags == "debug" %}DEBUG
+                        {% endif %}
+                    </strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Закрыть"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

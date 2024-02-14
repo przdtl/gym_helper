@@ -1,0 +1,27 @@
+{% extends 'account/account_base.html' %}
+{% block settings_page %}
+    <form action="" method="post" id="settings-form">
+        {% csrf_token %}
+        <div class="card-body pb-2">
+            <div class="form-group">
+                <label class="form-label" for="email_input">E-mail</label>
+                <div class="input-group mb-3">
+                    <input class="form-control" type="text" id="email_input" value="{{ user.email }}" readonly>
+                    <span class="input-group-text {% if user.is_verified_email %}bg-success{% else %}bg-danger{% endif %} text-white">{% if user.is_verified_email %}
+                        Подтверждён{% else %}Не подтверждён{% endif %}</span>
+                </div>
+            </div>
+
+        </div>
+    </form>
+{% endblock %}
+{% block addition_scripts %}
+    <script>
+        function myFunction() {
+            let element = document.querySelector(".account-settings-links #email_change");
+            element.classList.add("active");
+        }
+
+        myFunction();
+    </script>
+{% endblock %}

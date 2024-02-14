@@ -1,0 +1,7 @@
+{% extends 'list_objects.html' %}
+{% block list_header %}Все упражнения категории "{{ category }}"{% endblock %}
+{% block object_url %}{{ object.get_absolute_url }}{% endblock %}
+{% block object_image_text %}{{ object }}{% endblock %}
+{% block object_title %}{{ object.exercise_name }}{% endblock %}
+{% block object_body %}{% endblock %}
+

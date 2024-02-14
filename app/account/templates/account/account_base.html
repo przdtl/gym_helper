@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addition_stylesheet %}
+    <link rel="stylesheet" href="{% static 'account/css/account.css' %}">
+{% endblock %}
+{% block main %}
+    <div class="container light-style flex-grow-1 container-p-y">
+        <h4 class="font-weight-bold py-3 mb-4">
+            Настройки аккаунта
+        </h4>
+        <div class="card overflow-hidden">
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="general"
+                           href="{% url 'account:index' %}">Основные</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="change_password"
+                           href="{% url 'account:password_change' %}">Сменить пароль</a>
+                        <a class="list-group-item list-group-item-action" data-toggle="list" id="email_change"
+                           href="{% url 'account:change_email' %}">Email</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            {% block settings_page %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-right mt-3">
+            <button type="submit" class="btn btn-primary" form="settings-form">Сохранить изменения</button>&nbsp;
+            <a href="{{ request.path }}">
+                <button class="btn btn-outline-secondary">Сбросить изменения</button>
+            </a>
+            <a href="{% url 'account:logout' %}">
+                <button class="btn btn-danger">Выйти</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

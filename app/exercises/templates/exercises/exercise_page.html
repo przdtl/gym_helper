@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load exercise_tags %}
+{% block main %}
+    <h1 class="my-4">{{ object.exercise_name }}</h1>
+    <div>
+        <div class="row">
+            <div class="col">
+                <img alt="exercise_image" width="100%"
+                        {% if object.image %}
+                     src="{{ object.image.url }}"
+                        {% else %}
+                     src="{% static 'exercises/images/no_exercise_image.png' %}"
+                        {% endif %}
+                >
+            </div>
+            <div class="col-7">
+                <div class="container">
+                    <div class="row">
+                        <h4>Описание</h4>
+                        {% if object.description %}
+                            <p>{{ object.description }}</p>
+                        {% else %}
+                            <p>Описание отсутствует</p>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <h4>Инструкция по выполнению</h4>
+                        {% if object.instruction_as_list %}
+                            <ul class="ms-3">
+                                {% for instruction in object.instruction_as_list %}
+                                    <li>{{ instruction }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>Инструкция к упражнению отсутствует</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if request.user.is_authenticated %}
+            <h4 class="mt-5">История выполнения</h4>
+            <div class="album">
+                <div class="row row-cols-1 row-cols-xs-1 row-cols-md-2 row-cols-lg-3">
+                    {% for workout_with_current_exercise in object.exercisesinworkout_set.all|in_created_by:request.user|reverse_workouts %}
+                        {% if workout_with_current_exercise.approachexercisesinworkout_set.all.exists %}
+                            <div class="col py-2">
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-secondary">
+                                        {% if workout_with_current_exercise.workout.beginning_datetime %}
+                                            {{ workout_with_current_exercise.workout.beginning_datetime|date:"Y-m-d" }}
+                                        {% else %}
+                                            НЕТ ДАТЫ
+                                        {% endif %}
+                                    </li>
+                                    {% for approach in workout_with_current_exercise.approachexercisesinworkout_set.all|reverse_approaches %}
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>{{ approach }}</span>
+                                            <span>{{ approach.datetime }}</span>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        {% endif %}
+{% endblock %}
+

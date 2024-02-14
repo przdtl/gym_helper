@@ -1,0 +1,55 @@
+#add-new-template {
+    /*background-color: #59b259;*/
+    transition: .2s;
+    border: 2px solid #59b259;
+}
+
+/*#add-new-template:hover {*/
+/*    color: white;*/
+/*    background-color: #59b259;*/
+/*}*/
+
+#start-empty-training {
+    /*background-color: #ff99cc;*/
+    border: 2px solid #ff99cc;
+}
+
+#start-training {
+    /*background-color: #F9E79F;*/
+    border: 3px solid #F9E79F;
+}
+
+/*#delete-exercise {*/
+/*    background-color: #ff3c3c;*/
+/*    !*border: 3px solid #ff3c3c;*!*/
+/*}*/
+
+#add-approach {
+    border: 2px solid lightskyblue;
+    /*background-color: lightskyblue;*/
+}
+
+.accordionWorkout .accordion-item {
+    border: none;
+}
+
+#end-training {
+    /*background-color: #FF5733;*/
+    border: 2px solid #FF5733;
+}
+
+#change-approach {
+    border: 3px solid #B0C4DE;
+}
+
+.btn-workout-approaches:not(:disabled):hover {
+    background-color: #c3dee8;
+}
+
+.btn-workout-categories:not(:disabled):hover {
+    background-color: #e9f8ff;
+}
+
+.btn-workout-categories:disabled {
+    background-color: #f3f3f3;
+}

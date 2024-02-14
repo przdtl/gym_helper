@@ -1,0 +1,6 @@
+{% extends 'list_objects.html' %}
+{% block list_header %}Все категории{% endblock %}
+{% block object_url %}{% url 'exercises:exercises_by_category' category_name=object.slug %}{% endblock %}
+{% block object_image_text %}{{ object }}{% endblock %}
+{% block object_title %}{{ object.category_name }}{% endblock %}
+{% block object_body %}{% endblock %}

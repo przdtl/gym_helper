@@ -1,0 +1,7 @@
+Django==4.2.9
+pillow==10.2.0
+pytils==0.4.1
+django-bootstrap-v5==1.0.11
+psycopg2-binary==2.9.6
+gunicorn==21.2.0
+psycopg2-binary==2.9.6

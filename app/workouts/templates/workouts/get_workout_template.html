@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addition_stylesheet %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'workouts/css/workout.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/list_objects.css' %}">
+{% endblock %}
+{% block main %}
+    <h1 class="my-4">{% block list_header %}{{ object.workout_name }}{% endblock %}</h1>
+    <hr class="bg-danger border-2 border-top border-secondary"/>
+    <div>
+        <div class="row row-cols-1 g-3">
+            <div class="col zoom">
+                <a href="{% url 'workouts:add_exercise_to_template' pk=object.id %}"
+                   style="text-decoration: none; color: black;">
+                    <div class="card shadow-sm" id="add-new-template">
+                        <div class="card-body">
+                            <span class="" style="font-size: 1.1rem">+ Добавить упражнение</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% for exercise in object.exercisesinworkouttemplate_set.all %}
+                <div class="col zoom">
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{ exercise.exercise.get_absolute_url }}"
+                               style="text-decoration: none; color: black;">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <text class="card-title"
+                                              style="font-size: 1.1rem">{{ exercise.exercise.exercise_name }}</text>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col col-auto ps-0">
+                            <a href="{% url 'workouts:delete_exercise_from_template' pk=exercise.id %}">
+                                {% include 'components/delete_button.html' %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

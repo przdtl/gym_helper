@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addition_stylesheet %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'workouts/css/workout.css' %}">
+{% endblock %}
+{% block main %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="accordion" id="accordionCategories">
+            {% for category in object_list %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsCategories-heading{{ forloop.counter }}">
+                        <button class="accordion-button collapsed btn-workout-categories"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#panelsCategories-collapse{{ forloop.counter }}"
+                                aria-expanded="false"
+                                aria-controls="panelsCategories-collapse{{ forloop.counter }}"
+                                {% if not category.exercisesmodel_set.all.exists %}
+                                disabled
+                                {% endif %}>
+                            {{ category.category_name }}
+                        </button>
+                    </h2>
+                    <div id="panelsCategories-collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+                         aria-labelledby="panelsCategories-heading{{ forloop.counter }}">
+                        <div class="accordion-body">
+                            {% for exercise in category.exercisesmodel_set.all %}
+                                <div class="card my-1">
+                                    <div class="card-body">
+                                        <input class="form-check-input" type="checkbox"
+                                               id="{{ category.id }}_check{{ forloop.counter }}"
+                                               name="checkbox_{{ exercise.id }}">
+                                        <label for="{{ category.id }}_check{{ forloop.counter }}">{{ exercise }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="alert clearfix">
+            <input class="btn btn-primary float-end" type="submit" value="Добавить">
+        </div>
+    </form>
+{% endblock %}

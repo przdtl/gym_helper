@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addition_stylesheet %}
+    <link rel="stylesheet" href="{% static 'account/css/outside_the_account.css' %}">
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+    <div class="form-signin">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h1>ВХОД</h1>
+            <div class="form-floating">
+                {{ form.username }}
+                {#                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">#}
+                <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+            </div>
+            <div class="form-floating">
+                {{ form.password }}
+                {#                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">#}
+                <label for="{{ form.password.id_for_label }}">Пароль</label>
+            </div>
+
+            <div class="checkbox">
+                <label>
+                    {{ form.remember_me }}
+                    Запомнить меня
+                </label>
+            </div>
+            <div class="col">
+                <a href="{% url 'account:password_reset' %}">Забыли пароль?</a>
+            </div>
+            <button class="w-100 btn btn-primary" type="submit">Войти</button>
+            <p class="text-center">или<br><a data-toggle="tab" href="{% url 'account:register' %}">Зарегистрируйтесь</a>
+            </p>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'account/account_base.html' %}
+{% block settings_page %}
+    <form action="" method="post" id="settings-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-body media align-items-center">
+            <div class="media-body ml-4">
+                <div class="mb-3">
+                    <label class="form-label">Фото профиля</label>
+                    <img src="
+
+
+
+                            {% if user.image %}{{ user.image.url }}{% else %}https://bootdey.com/img/Content/avatar/avatar1.png{% endif %}"
+                         alt="" class="d-block ui-w-80" style="margin: 0 0 0.5rem">
+                    {{ form.image }}
+                </div>
+                {#                <button type="button" class="btn btn-default md-btn-flat">Reset</button>#}
+                {#                <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>#}
+            </div>
+        </div>
+        <hr class="border-light m-0">
+        <div class="card-body ">
+            <div class="form-group">
+                <label class="form-label" for="{{ form.username.id_for_label }}">Логин</label>
+                {{ form.username }}
+                {#                <input type="text" class="form-control mb-1" value="nmaxwell">#}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.first_name.id_for_label }}">Имя</label>
+                {{ form.first_name }}
+                {#                <input type="text" class="form-control" value="Nelle Maxwell">#}
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                {{ form.last_name }}
+            </div>
+{#            <div class="form-group">#}
+{#                <label class="form-label" for="{{ form.email.id_for_label }}">E-mail</label>#}
+{#                {{ form.email }}#}
+{#            </div>#}
+        </div>
+    </form>
+{% endblock %}
+{% block addition_scripts %}
+    <script>
+        function myFunction() {
+            let element = document.querySelector(".account-settings-links #general");
+            element.classList.add("active");
+        }
+
+        myFunction();
+    </script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'list_objects.html' %}
+{% block list_header %}Все упражнения{% endblock %}
+{% block object_url %}{{ object.get_absolute_url }}{% endblock %}
+{% block object_title %}{{ object.exercise_name }}{% endblock %}
+{% block object_image_text %}{{ object }}{% endblock %}
+{% block object_body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+        </div>
+        <small class="text-muted">Категория: {{ object.category.category_name }}</small>
+    </div>
+{% endblock %}

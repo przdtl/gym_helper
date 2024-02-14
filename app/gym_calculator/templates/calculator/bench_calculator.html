@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block main %}
+    <form action="" method="POST" class="mt-5 p-auto">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <label for="{{ form.barbell_weight.id_for_label }}">Вес штанги в жиме лёжа (кг):</label>
+                </div>
+                <div class="col">
+                    <label for="{{ form.reps.id_for_label }}">Количество повторений с этим весом:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    {{ form.barbell_weight }}
+                </div>
+                <div class="col">
+                    {{ form.reps }}
+                </div>
+            </div>
+            <hr class="my-3">
+            {% for key, value in formulas.items %}
+                <div class="row">
+                    <div class="col">{{ key }}</div>
+                    <div class="col">{% if not value %}-{% else %}{{ value }}{% endif %}</div>
+                </div>
+            {% endfor %}
+            <hr class="my-3">
+            <div class="row">
+                <div class="col">ОДНО-ПОВТОРНЫЙ МАКСИМУМ<br> (СРЕДНЕЕ ЗНАЧЕНИЕ):</div>
+                <div class="col">{% if result %}{{ result }}{% else %}-{% endif %}</div>
+            </div>
+            <div class="row py-4">
+                <input type="submit" name="add" value="Рассчитать максимум в жиме лежа" class="btn btn-secondary">
+            </div>
+        </div>
+    </form>
+{% endblock %}

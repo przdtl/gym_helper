@@ -1,0 +1,6 @@
+.toast-container {
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
+    z-index: 5;
+}

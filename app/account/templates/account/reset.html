@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block addition_stylesheet %}
+    <link rel="stylesheet" href="{% static 'account/css/outside_the_account.css' %}">
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block main %}
+    <div class="form-signin">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h1>ВВОД НОВОГО ПАРОЛЯ</h1>
+            <div class="form-floating">
+                {{ form.new_password1 }}
+                <label for="{{ form.new_password1.id_for_label }}">Новый пароль</label>
+            </div>
+            <div class="form-floating">
+                {{ form.new_password2 }}
+                <label for="{{ form.new_password2.id_for_label }}">Повторение пароля</label>
+            </div>
+            <button class="w-100 btn btn-primary" type="submit">Установить пароль</button>
+        </form>
+    </div>
+{% endblock %}
