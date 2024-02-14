@@ -31,6 +31,9 @@ DEBUG = bool(os.environ.get('DEBUG', default=0))
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', default='*').split(' ')
 
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000')
+
+
 DOMAIN_NAME = 'http://localhost:8000'
 
 # Application definition
@@ -140,8 +143,6 @@ if DEBUG:
     ]
 else:
     STATIC_ROOT = BASE_DIR / 'static'
-
-CSRF_TRUSTED_ORIGINS = ["http://localhost:1337"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
