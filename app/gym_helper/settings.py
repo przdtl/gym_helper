@@ -33,9 +33,6 @@ ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', default='*').split(' ')
 
 CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(' ')
 
-
-DOMAIN_NAME = 'http://localhost:8000'
-
 # Application definition
 
 INSTALLED_APPS = [
