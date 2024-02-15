@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm, PasswordChangeForm, \
     PasswordResetForm, UsernameField, SetPasswordForm
 from django.core.exceptions import ValidationError
+from django.shortcuts import get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.utils.timezone import now
 
@@ -24,6 +25,15 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = UserModel
         fields = ['username', 'password', 'remember_me']
+
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        user = UserModel.objects.filter(username=username)
+        if user.exists() and not user.first().is_verified_email:
+            raise ValidationError(
+                'Данный аккаунт не активирован! Для подтверждения аккаунта, перейдите по по ссылке в письме, отправленном на адрес электронной почты, указанный при регистрации'
+            )
+        return super().clean()
 
 
 class RegisterForm(UserCreationForm):
